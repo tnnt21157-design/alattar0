@@ -30,3 +30,37 @@
     font-size: 11px;
 }
 
+
+
+/* Alattar management label */
+.top {
+    min-height: 95px;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.top .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.35;
+    flex-shrink: 0;
+}
+.top .brand > small {
+    display: block !important;
+    font-family: 'Cairo', sans-serif;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #f1c96b !important;
+    line-height: 1.8 !important;
+    white-space: nowrap;
+}
+@media (max-width: 620px) {
+    .top {
+        min-height: 85px;
+        height: auto;
+    }
+    .top .brand > small {
+        font-size: 10px !important;
+    }
+}
