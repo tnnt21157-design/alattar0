@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+{% extends 'base.html' %}
 {% block content %}
 <section class="hero">
     <div>
@@ -64,6 +64,12 @@
                         <option value="1">عبوة 1 دينار</option>
                         <option value="3">عبوة 3 دنانير</option>
                         <option value="5">عبوة 5 دنانير</option>
+                    </select>
+                    {% endif %}
+                    {% if p.name == 'زيت اللوز 30 مل' %}
+                    <select name="almond_type" aria-label="اختر نوع زيت اللوز">
+                        <option value="حلو">زيت اللوز الحلو</option>
+                        <option value="مر">زيت اللوز المر</option>
                     </select>
                     {% endif %}
                     <button class="add">أضف للسلة</button>
