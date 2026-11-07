@@ -84,7 +84,7 @@ def init_store():
     if Product.query.count() == 0:
         for category, entries in CATALOG.items():
             for name, price in entries:
-                filename = re.sub(r"[^\\w\\-]+", "_", name, flags=re.UNICODE).strip("_") or "product"
+                filename = re.sub(r"[^\w\-]+", "_", name, flags=re.UNICODE).strip("_") or "product"
                 image_path = "products/" + filename + ".jpg"
                 db.session.add(Product(name=name, category=category, price=price, image_path=image_path))
     if not StoreSetting.query.filter_by(key="whatsapp").first():
@@ -231,9 +231,9 @@ def checkout():
     order = Order(customer_name=name, phone=phone, address=address, notes=notes, items_json=json.dumps(order_items, ensure_ascii=False), total=round(total,2))
     db.session.add(order)
     db.session.commit()
-    message = "طلب جديد من متجر العطّار\\n" + "\\n".join(rows) + "\\nالمجموع: " + format(total, ".2f") + " د.أ\\nالاسم: " + name + "\\nالهاتف: " + phone + "\\nالعنوان: " + address + "\\nملاحظات: " + notes + "\\n" + setting("delivery_text", "التوصيل يبدأ من 1 دينار حسب المنطقة")
+    message = "طلب جديد من متجر العطّار\n" + "\n".join(rows) + "\nالمجموع: " + format(total, ".2f") + " د.أ\nالاسم: " + name + "\nالهاتف: " + phone + "\nالعنوان: " + address + "\nملاحظات: " + notes + "\n" + setting("delivery_text", "التوصيل يبدأ من 1 دينار حسب المنطقة")
     session["cart"] = {}
-    whatsapp = re.sub(r"\\D", "", setting("whatsapp", "962781611698"))
+    whatsapp = re.sub(r"\D", "", setting("whatsapp", "962781611698"))
     return redirect("https://wa.me/" + whatsapp + "?text=" + quote(message))
 
 @app.route("/admin", methods=["GET", "POST"])
@@ -366,7 +366,7 @@ def admin_order_status():
 def admin_settings():
     gate = admin_required()
     if gate: return gate
-    whatsapp = re.sub(r"\\D", "", request.form.get("whatsapp", ""))
+    whatsapp = re.sub(r"\D", "", request.form.get("whatsapp", ""))
     delivery = request.form.get("delivery_text", "").strip()[:300]
     if len(whatsapp) >= 10 and delivery:
         set_setting("whatsapp", whatsapp)
